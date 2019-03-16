@@ -1,6 +1,9 @@
 /* eslint-disable no-console, no-process-exit */
 const imdb = require('./src/imdb');
+const fs = require('fs');
 const DENZEL_IMDB_ID = 'nm0000243';
+
+var MyJSONText; 
 
 async function sandbox (actor) {
   try {
@@ -10,12 +13,15 @@ async function sandbox (actor) {
 
     console.log(`🍿 ${movies.length} movies found.`);
     console.log(JSON.stringify(movies, null, 2));
-    console.log(`🥇 ${awesome.length} awesome movies found.`);
+	console.log(`🥇 ${awesome.length} awesome movies found.`);
     console.log(JSON.stringify(awesome, null, 2));
+	
+	fs.writeFileSync("filmsBDD.json", JSON.stringify(movies, null, 2));
+	fs.writeFileSync("AwesomefilmsBDD.json", JSON.stringify(awesome, null, 2));
     process.exit(0);
   } catch (e) {
     console.error(e);
-    process.exit(1);
+    process.exit(1); 
   }
 }
 
